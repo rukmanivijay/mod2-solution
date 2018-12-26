@@ -1,1 +1,81 @@
-Rukmani
+<!doctype html>
+<html ng-app="ShoppingListCheckOff" lang="en">
+  <head>
+    <title>Shopping List Check Off</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <script src="app.js"></script>
+    <style>
+      .emptyMessage {
+        font-weight: bold;
+        color: red;
+        font-size: 1.2em;
+      }
+      li {
+        margin-bottom: 7px;
+        font-size: 1.2em;
+      }
+      li > button {
+        margin-left: 6px;
+      }
+      button > span {
+        color: green;
+      }
+    </style>
+  </head>
+<body>
+  <div ng-controller="ShoppingListBoughtController as sb" class="container">
+    <h1>Shopping List Check Off</h1>
+    <div class="row">
+      <!-- To Buy List-->
+      <div class="col-md-6">
+         <h2>To Buy:</h2>
+           <ul>
+             <li ng-repeat="item in sb.items">Buy {{item.quantity}} of {{item.name}}(s) <button ng-click="sb.addItem(item)" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
+           </ul>
+         <div ng-if="sb.items.length==0" class="emptyMessage">Everything is bought! </div>
+      </div>
+
+      <!-- Already Bought List-->
+      <div ng-controller="ShoppingListAlreadyBoughtController as sa" class="col-md-6">
+         <h2>Already Bought:</h2>
+           <ul>
+             <li ng-repeat="item in sa.alreadyBoughtList">Bought {{item.quantity}} of {{item.name}}(s)</li>
+           </ul>
+         <div ng-if="sa.alreadyBoughtList.length==0"  class="emptyMessage">Nothing bought yet.</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html ng-app='ShoppingListApp'>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="app.js"></script>
+    <style> body { font-size: 1.2em; }</style>
+    <title>Custom Service</title>
+  </head>
+  <body>
+    <h1>Custom Service</h1>
+    <div ng-controller='ShoppingListAddController as itemAdder'>
+      <input type="text" ng-model="itemAdder.itemName" placeholder="item name">
+      <input type="text" ng-model="itemAdder.itemQuantity" placeholder="quantity">
+      <button ng-click="itemAdder.addItem();">Add Item To Shopping List</button>
+    </div>
+
+    <div ng-controller='ShoppingListShowController as showList'>
+      <ol>
+        <li ng-repeat="item in showList.items">
+          {{ item.quantity }} of {{ item.name }}
+          <button ng-click="showList.removeItem($index);">Remove Item</button>
+        </li>
+      </ol>
+    </div>
+  </body>
+</html> -->
